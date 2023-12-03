@@ -18,7 +18,7 @@ USE `PD` ;
 -- Table `PD`.`employment`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PD`.`employment` (
-  `id` INT(3) NOT NULL,
+  `id` INT NOT NULL,
   `title` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -28,13 +28,13 @@ ENGINE = InnoDB;
 -- Table `PD`.`employee`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PD`.`employee` (
-  `id` INT(3) NOT NULL,
+  `id` INT NOT NULL,
   `firstName` VARCHAR(30) NOT NULL,
   `lastName` VARCHAR(30) NOT NULL,
   `patronymic` VARCHAR(30) NOT NULL,
   `login` VARCHAR(30) NOT NULL,
   `password` VARCHAR(30) NOT NULL,
-  `id_employment` INT(3) NOT NULL,
+  `id_employment` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_employee_employment_idx` (`id_employment` ASC) VISIBLE,
   CONSTRAINT `fk_employee_employment`
@@ -49,11 +49,11 @@ ENGINE = InnoDB;
 -- Table `PD`.`news`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PD`.`news` (
-  `id` INT(100) NOT NULL,
+  `id` INT NOT NULL,
   `content` TEXT NULL,
   `publish_date` DATE NOT NULL,
   `title` VARCHAR(255) NOT NULL,
-  `author_id` INT(3) NOT NULL,
+  `author_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_news_employee1_idx` (`author_id` ASC) INVISIBLE,
   CONSTRAINT `fk_news_employee1`
@@ -68,7 +68,7 @@ ENGINE = InnoDB;
 -- Table `PD`.`service`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PD`.`service` (
-  `id` INT(2) NOT NULL,
+  `id` INT NOT NULL,
   `title` VARCHAR(30) NOT NULL,
   `description` TEXT NULL,
   PRIMARY KEY (`id`))
@@ -79,7 +79,7 @@ ENGINE = InnoDB;
 -- Table `PD`.`status_of_request`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PD`.`status_of_request` (
-  `id` INT(1) NOT NULL,
+  `id` INT NOT NULL,
   `title` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -89,9 +89,9 @@ ENGINE = InnoDB;
 -- Table `PD`.`form_education`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PD`.`form_education` (
-  `id` INT(1) NOT NULL,
+  `id` INT NOT NULL,
   `title` VARCHAR(50) NOT NULL,
-  `years_of_education` INT(2) NOT NULL,
+  `years_of_education` INT NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -100,7 +100,7 @@ ENGINE = InnoDB;
 -- Table `PD`.`type_of_dormitorie`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PD`.`type_of_dormitorie` (
-  `id` INT(1) NOT NULL,
+  `id` INT NOT NULL,
   `title` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -110,10 +110,10 @@ ENGINE = InnoDB;
 -- Table `PD`.`dormitorie`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PD`.`dormitorie` (
-  `id` INT(2) NOT NULL,
+  `id` INT NOT NULL,
   `number` INT(2) NOT NULL,
   `address` VARCHAR(50) NOT NULL,
-  `id_type_of_dormotories` INT(1) NOT NULL,
+  `id_type_of_dormotories` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_dormitorie_type_of_dormitorie1_idx` (`id_type_of_dormotories` ASC) VISIBLE,
   CONSTRAINT `fk_dormitorie_type_of_dormitorie1`
@@ -128,7 +128,7 @@ ENGINE = InnoDB;
 -- Table `PD`.`type_of_room`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PD`.`type_of_room` (
-  `id` INT(2) NOT NULL,
+  `id` INT NOT NULL,
   `title` VARCHAR(30) NOT NULL,
   `description` TEXT NULL,
   `cost_per_month` DECIMAL(10,2) NULL,
@@ -140,10 +140,10 @@ ENGINE = InnoDB;
 -- Table `PD`.`room`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PD`.`room` (
-  `id` INT(2) NOT NULL,
+  `id` INT NOT NULL,
   `room_number` VARCHAR(50) NOT NULL,
-  `id_type_of_room` INT(2) NOT NULL,
-  `id_dormitorie` INT(2) NOT NULL,
+  `id_type_of_room` INT NOT NULL,
+  `id_dormitorie` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_room_type_of_room1_idx` (`id_type_of_room` ASC) VISIBLE,
   INDEX `fk_room_dormitorie1_idx` (`id_dormitorie` ASC) VISIBLE,
@@ -164,7 +164,7 @@ ENGINE = InnoDB;
 -- Table `PD`.`student`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PD`.`student` (
-  `id` INT(6) NOT NULL,
+  `id` INT NOT NULL,
   `firstName` VARCHAR(50) NULL,
   `lastname` VARCHAR(50) NULL,
   `patronymic` VARCHAR(50) NULL,
@@ -175,8 +175,8 @@ CREATE TABLE IF NOT EXISTS `PD`.`student` (
   `password` VARCHAR(30) NOT NULL,
   `check_in_date` DATE NULL,
   `check_out_date` DATE NULL,
-  `id_room` INT(2) NOT NULL,
-  `id_forms_education` INT(1) NOT NULL,
+  `id_room` INT NOT NULL,
+  `id_forms_education` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_student_room1_idx` (`id_room` ASC) VISIBLE,
   INDEX `fk_student_ form_education1_idx` (`id_forms_education` ASC) VISIBLE,
@@ -197,12 +197,12 @@ ENGINE = InnoDB;
 -- Table `PD`.`request`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PD`.`request` (
-  `id` INT(10) NOT NULL,
+  `id` INT NOT NULL,
   `date` DATE NULL,
-  `id_student` INT(6) NOT NULL,
-  `id_status` INT(1) NOT NULL,
-  `id_service` INT(2) NOT NULL,
-  `id_employee` INT(3) NOT NULL,
+  `id_student` INT NOT NULL,
+  `id_status` INT NOT NULL,
+  `id_service` INT NOT NULL,
+  `id_employee` INT NOT NULL,
   `description` VARCHAR(255) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_request_student1_idx` (`id_student` ASC) VISIBLE,
